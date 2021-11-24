@@ -46,7 +46,7 @@ int main()
 	}
 	cornerSubPix(grayImage, corners, patternsize, Size(CheckerboardInnerWidth[3], CheckerboardInnerHeight[3]), TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
 	drawChessboardCorners(grayImage,patternsize,corners,true);
-	//imshow("Mikolaj Nowak", grayImage);
+	//imshow("184865", grayImage);
 	//imwrite("184865_D_TopChessboardFound.jpg", grayImage);
 	int roznicax = corners[1].x - corners[0].x;
 	int roznicay = corners[1].y - corners[0].y;
