@@ -44,12 +44,12 @@ int main()
 		waitKey();
 		return(-1);
 	}
-	cornerSubPix(grayImage, corners, patternsize, Size(CheckerboardInnerWidth[3], CheckerboardInnerHeight[3]), TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
+	cornerSubPix(grayImage, corners, Size(5,5), Size(-1,-1), TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
 	drawChessboardCorners(grayImage,patternsize,corners,true);
 	//imshow("Mikolaj Nowak", grayImage);
 	//imwrite("184865_D_TopChessboardFound.jpg", grayImage);
-	double roznicax = corners[1].x - corners[0].x;
-	double roznicay = corners[1].y - corners[0].y;
+	float roznicax = corners[1].x - corners[0].x;
+	float roznicay = corners[1].y - corners[0].y;
 	double odleglosc = sqrt(pow(roznicax,2) + pow(roznicay,2));
 	cout << odleglosc << endl;
 	for (int i = 0; i < 39; i++) {
@@ -61,7 +61,7 @@ int main()
 	vector<Point2f>templateCorners;
 	for (int i = 0; i < patternsize.height; i++) {
 		for (int j = 0; j < patternsize.width; j++) {
-			Point2f coord;
+			Point2f coord = CheckerboardLTCoordinatesWithMargin[0];
 			coord.x = CheckerboardLTCoordinatesWithMargin[0].x + (j+1) * CHECKERBOARD_FIELD_SIZE;
 			coord.y = CheckerboardLTCoordinatesWithMargin[0].y + (i+1) * CHECKERBOARD_FIELD_SIZE;
 			templateCorners.push_back(coord * reverseScale);
@@ -77,7 +77,7 @@ int main()
 	std::vector<Point2f>dewarpedCorners;
 	perspectiveTransform(corners, dewarpedCorners, homography);
 	for (int i = 0; i < 39; i++) {
-		circle(debugImage, dewarpedCorners[i], 12, Scalar(255, 0, 0), 2);
+		circle(debugImage, dewarpedCorners[i], 10, Scalar(255, 0, 0), 5);
 	}
 	imshow("Mikolaj Nowak", debugImage);
 	imwrite("184865_D_Dewarped_ROI.jpg", debugImage);
