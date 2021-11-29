@@ -61,7 +61,7 @@ int main()
 	vector<Point2f>templateCorners;
 	for (int i = 0; i < patternsize.height; i++) {
 		for (int j = 0; j < patternsize.width; j++) {
-			Point2f coord = CheckerboardLTCoordinatesWithMargin[0];
+			Point2f coord;
 			coord.x = CheckerboardLTCoordinatesWithMargin[0].x + (j+1) * CHECKERBOARD_FIELD_SIZE;
 			coord.y = CheckerboardLTCoordinatesWithMargin[0].y + (i+1) * CHECKERBOARD_FIELD_SIZE;
 			templateCorners.push_back(coord * reverseScale);
